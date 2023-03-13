@@ -7,12 +7,12 @@ $password = $_POST['password'];
 $confirm_password = $_POST['confirm_password'];
 
 // validate form data
-if (empty($username) || empty($email) || empty($password) || empty($confirm_password)) {
-  $response = array('success' => false, 'message' => 'Please fill in all fields.');
-} elseif ($password != $confirm_password) {
-  $response = array('success' => false, 'message' => 'Passwords do not match.');
-} else
- {
+// if (empty($username) || empty($email) || empty($password) || empty($confirm_password)) {
+//   $response = array('success' => false, 'message' => 'Please fill in all fields.');
+// } elseif ($password != $confirm_password) {
+//   $response = array('success' => false, 'message' => 'Passwords do not match.');
+// } else
+//  {
   // connect to database
   $conn =  mysqli_connect('localhost', 'root', '', 'sign_up');
 
@@ -30,4 +30,4 @@ if (empty($username) || empty($email) || empty($password) || empty($confirm_pass
   // close database connection
   $stmt->close();
   $conn->close();
-}
+// }

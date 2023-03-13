@@ -3,41 +3,50 @@ function toggleVisibility() {
      const icon = document.getElementById("icon");
      if (passwordInput.type === "password") {
       passwordInput.type="text";
-      icon.innerText = "visibility_off"
+      icon.innerText = "visibility"
     } else {
       passwordInput.type = "password";
-      icon.innerText = "visibility"
+      icon.innerText = "visibility_off"
     }
-    }
+}
 $(document).ready(function() {
       // listen for form submission
-      $('#login-form').submit(function(event) {
+      $('#logininput').submit(function(event) {
         event.preventDefault(); // prevent default form submission
     
         // get form data
-        var username = $('#username').val();
-        var password = $('#password').val();
+        var formData = {
+         username : $('#email').val(),
+         password : $('#password').val()
+          };
+        
     
         // send data to server using AJAX
-        $.ajax({
-          type: 'POST',
-          url: 'login.php',
-          data: { username: username, password: password },
-          dataType: 'json',
-          success: function(response) {
-            if (response.success) {
-              // redirect to profile page
-              window.location.href = 'profile.php';
-            } else {
-              // display error message
-              alert(response.message);
-            }
-          },
-          error: function() {
-            // display error message
-            alert('Error connecting to server.');
-          }
-        });
-      });
-    });
+        $.post('./login.php',formData).done(function(){
+        window.location.href="profile.html";
     
+          }).fail(function(){
+            alert("Wrong username and Password");
+          })
+        // $.ajax({
+        //   type: 'POST',
+        //   url: './login.php',
+        //   data: { username: username, password: password },
+        //   dataType: 'json',
+        //   success: function(response) {
+        //     if (response.success) {
+        //       // redirect to profile page
+        //       console.log("hi");
+        //     } else {
+        //       // display error message
+        //       alert(response.message);
+        //     }
+    //     //   },
+    //       error: function() {
+    //         // display error message
+    //         alert('Error connecting to server.');
+    //       }
+    //     });
+    //    });
+    });
+})
